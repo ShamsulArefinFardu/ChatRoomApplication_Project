@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Chat Rooms";
+}
+<div class="breadcrumb">
+    <div class="form-inline">
+        <div id="loginNameBox" class="input-group mb-xl-1 col-md-auto">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="lblLogin">User ID:</span>
+            </div>
+            <input type="text" class="form-control" id="loginName" name="loginName" placeholder="Example: Foysal" aria-label="Username" aria-describedby="lblLogin" />
+        </div>
+        <div id="loginPasswordBox" class="input-group mb-xl-1 col-md-auto">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="lblPassword">Password:</span>
+            </div>
+            <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Example: User Credentials" aria-label="Username" aria-describedby="lblPassword" />
+        </div>
+        <div id="loginSubmitBox" class="mb-xl-1 col-md-auto">
+            <input type="submit" id="login" name="login" class="btn btn-primary" value="Login" />
+        </div>
+        <div id="registrationLinkBox" class="form-inline mb-xl-1 col-md-auto">
+            <span class="text-lg-center h2">|</span>&nbsp;&nbsp;&nbsp;New user! Go&nbsp;@Html.ActionLink("here", "Register", "Home")&nbsp;for registiotion.
+        </div>
+    </div>
+    <div id="logoutSubmitBox" class="mb-xl-1 col-md-12" style="display: none;">
+        <input type="submit" id="logout" name="logout" class="btn btn-primary float-right" value="Logout" />
+    </div>
+</div>
+<div class="form-inline align-items-start">
+    <div id="allowedChatRoomsDiv" class="col-md-3">
+        <p></p>
+        <h3 class="h3 text-primary text-center">Assigned Rooms</h3>
+        @*@{
+                foreach (dynamic aUserRoom in ViewBag.RoomBasedUseres)
+                {
+                    <btn id="@aUserRoom" class="btn btn-primary btn-block">@aUserRoom</btn>
+                }
+            }*@
+        @*@{
+                string roomName = string.Empty;
+                foreach (dynamic aUserRoom in ViewBag.RoomBasedUseres)
+                {
+                    if (roomName == "")
+                    {
+                        roomName = aUserRoom.RoomName;
+                        @Html.Raw("<div class='card col-md-12 mb-2'><div class='card-body'><h5 class='card-title col-md-12 text-center'>")
+                        @Html.Raw(aUserRoom.RoomName)
+                        @Html.Raw("</h5><span class='col-auto img-thumbnail text-info font-weight-bold border-info'>")
+                        @Html.Raw(aUserRoom.UserRole.UserName)
+                        @Html.Raw("</span>")
+                    }
+                    else if (roomName != aUserRoom.RoomName)
+                    {
+                        roomName = aUserRoom.RoomName;
+                        @Html.Raw("</div></div><div class='card col-md-12 mb-2'><div class='card-body'><h5 class='card-title col-md-12 text-center'>")
+                        @Html.Raw(aUserRoom.RoomName)
+                        @Html.Raw("</h5><span class='col-auto img-thumbnail text-info font-weight-bold border-info'>")
+                        @Html.Raw(aUserRoom.UserRole.UserName)
+                        @Html.Raw("</span>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<span class='col-auto img-thumbnail text-info font-weight-bold border-info'>")
+                        @Html.Raw(aUserRoom.UserRole.UserName)
+                        @Html.Raw("</span>")
+                    }
+                }
+                @Html.Raw("</div></div>")
+            }*@
+    </div>
+    <div id="chatBoard" class="col-md-9 border-left border-secondary">
+        @*<div class="card">
+                <div class="card-header">
+                    <h4 id="roomheader" class="h4 card-title">Test Room</h4>
+                </div>
+                <div class="card-body pre-scrollable" style="height: 200px;">Test Body</div>
+                <div class="card-footer">
+                    <div class="input-group mb-xl-1 col-md-12">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="msglbl">Message:</span>
+                        </div>
+                        <input type="text" class="form-control" id="txtMessage" name="txtMessage" placeholder="Example: Sky Room" aria-label="Username" aria-describedby="msglbl" />
+                        <div class="input-group-append">
+                            <input type="submit" id="sendMessage" name="sendMessage" class="btn btn-primary" value="Send" />
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+</div>
+<div style="height:0px;width:0px;overflow:hidden;">
+    @*<image id="filePreviewImage" src="~/Images/chat.png" data-filename=""></image>*@
+</div>

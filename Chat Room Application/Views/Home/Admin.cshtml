@@ -1,0 +1,189 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "Admin Page";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Active Users</h3>
+    </div>
+    <div class="card-body">
+        <div class="form-inline">
+            <div class="input-group mb-xl-1 col-md-5">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="text1">Users:</span>
+                </div>
+                @Html.DropDownList("InactiveUsers", ViewBag.InactiveUserList as SelectList, htmlAttributes: new { @class = "form-control", @aria_describedby = "text1" })
+            </div>
+            <div class="input-group mb-xl-1 col-md-5">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" id="active" name="active" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with checkbox" disabled="disabled" value="Check to activate">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" id="activate" name="activate" class="btn btn-primary" value="Activate" />
+            </div>
+        </div>
+    </div>
+    <div class="card-footer"></div>
+</div>
+<hr />
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Role</h3>
+    </div>
+    <div class="card-body">
+        <div class="input-group mb-xl-1 col-md-12">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="text2">Role:</span>
+            </div>
+            <input type="text" class="form-control" id="roleName" name="roleName" placeholder="Example: Sky Room" aria-describedby="text2" />
+            <div class="input-group-append">
+                <input type="submit" id="addRole" name="addRole" class="btn btn-primary" value="Add" />
+            </div>
+        </div>
+        <span id="message" name="message" class="text-danger col-md-12 offset-1"></span>
+        <div id="roleCollection" name="roleCollection" class="form-inline col-md-12">
+            <h5 class="h5 col-md-12 text-center">Existing Roles</h5>
+            @foreach (var aRole in ViewBag.Roles)
+            {
+                <div class="col-auto img-thumbnail">@aRole.Name</div>
+            }
+        </div>
+    </div>
+    <div class="card-footer"></div>
+</div>
+<hr />
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">User's Role</h3>
+    </div>
+    <div class="card-body">
+        <div class="form-inline">
+            <div class="input-group mb-xl-1 col-md-5">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="text3">Users:</span>
+                </div>
+                @Html.DropDownList("ActiveUsers", ViewBag.ActiveUserList as SelectList, htmlAttributes: new { @class = "form-control", @aria_describedby = "text3" })
+            </div>
+            <div class="input-group mb-xl-1 col-md-5">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="text3">Roles:</span>
+                </div>
+                @Html.DropDownList("ExistingRoles", ViewBag.RoleList as SelectList, htmlAttributes: new { @class = "form-control", @aria_describedby = "text3" })
+            </div>
+            <div class="col-md-2">
+                <input type="submit" id="assignRole" name="assignRole" class="btn btn-primary" value="Assign Role" />
+            </div>
+        </div>
+    </div>
+    <div class="card-footer"></div>
+</div>
+<hr />
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Chat Room</h3>
+    </div>
+    <div class="card-body">
+        <div class="input-group mb-xl-1 col-md-12">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="text4">Room:</span>
+            </div>
+            <input type="text" class="form-control" id="roomName" name="roomName" placeholder="Example: Sky Room" aria-label="Username" aria-describedby="text4" />
+            <div class="input-group-append">
+                <input type="submit" id="addChatRoom" name="addChatRoom" class="btn btn-primary" value="Add" />
+            </div>
+        </div>
+        <span id="errRoomMsg" name="errRoomMsg" class="text-danger col-md-12 offset-1"></span>
+        <div id="roomCollection" name="roomCollection" class="form-inline col-md-12">
+            <h5 class="h5 col-md-12 text-center">Existing Chat Rooms</h5>
+            @foreach (var aRoom in ViewBag.ChatRooms)
+            {
+                <div class="col-auto img-thumbnail">
+                    <span class="text-info font-weight-bold">@aRoom.RoomName</span>
+                    <br />
+                    <span>@(((DateTime)aRoom.RoomCreationDate).ToString("ddd MMM dd yyyy"))</span>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="card-footer"></div>
+</div>
+<hr />
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Room assigned to users</h3>
+    </div>
+    <div class="card-body">
+        <div class="form-inline">
+            <div class="input-group mb-xl-1 col-md-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="text5">Available Rooms:</span>
+                </div>
+                @Html.DropDownList("ChatRooms", ViewBag.ChatRoomList as SelectList, htmlAttributes: new { @class = "form-control", @aria_describedby = "text5" })
+            </div>
+            <div class="input-group mb-xl-1 col-md-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="text6">Active Users:</span>
+                </div>
+                @Html.DropDownList("UserWithRole", ViewBag.UserListWithRole as SelectList, htmlAttributes: new { @class = "form-control", @aria_describedby = "text6" })
+            </div>
+            <div class="input-group mb-xl-1 col-md-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" id="allowed" name="allowed" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with checkbox" disabled="disabled" value="Check to allow">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" id="addUserToARoom" name="addUserToARoom" class="btn btn-primary" value="Assign Room" />
+            </div>
+            <span id="errConRoomMsg" name="errConRoomMsg" class="text-danger col-md-12 offset-2"></span>
+        </div>
+        <div class="col-md-12">&nbsp;&nbsp;</div>
+        <div id="roomWiseUsers" name="roomWiseUsers" class="col-md-12 form-inline">
+            @{
+                string roomName = string.Empty;
+                foreach (dynamic aUserRoom in ViewBag.RoomWiseUsers)
+                {
+                    if (roomName == "")
+                    {
+                        roomName = aUserRoom.RoomName;
+                        @Html.Raw("<div class='card col-md-12 mb-2'><div class='card-body'><h5 class='card-title col-md-12 text-center'>")
+                        @Html.Raw(aUserRoom.RoomName)
+                        @Html.Raw("</h5><span class='col-auto img-thumbnail text-info font-weight-bold border-info'>")
+                        @Html.Raw(aUserRoom.UserRole.UserName)
+                        @Html.Raw("</span>")
+                    }
+                    else if (roomName != aUserRoom.RoomName)
+                    {
+                        roomName = aUserRoom.RoomName;
+                        @Html.Raw("</div></div><div class='card col-md-12 mb-2'><div class='card-body'><h5 class='card-title col-md-12 text-center'>")
+                        @Html.Raw(aUserRoom.RoomName)
+                        @Html.Raw("</h5><span class='col-auto img-thumbnail text-info font-weight-bold border-info'>")
+                        @Html.Raw(aUserRoom.UserRole.UserName)
+                        @Html.Raw("</span>")
+                    }
+                    else
+                    {
+                        @Html.Raw("<span class='col-auto img-thumbnail text-info font-weight-bold border-info'>")
+                        @Html.Raw(aUserRoom.UserRole.UserName)
+                        @Html.Raw("</span>")
+                    }
+                }
+                @Html.Raw("</div></div>")
+            }
+        </div>
+    </div>
+    <div class="card-footer"></div>
+</div>
+
+@section Scripts {
+    @*<script src="~/signalr/hubs"></script>
+        <script src="~/Scripts/app.js"></script>*@
+}
